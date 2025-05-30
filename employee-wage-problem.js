@@ -82,6 +82,20 @@ function calculateConditionalWage() {
     console.log("Total Conditional Wage:", totalWage);
 }
 
+class EmployeeWageCalculator {
+    computeWages() {
+        const empStatus = checkAttendance();
+        console.log("\n------UC7 (using class)------");
+        console.log(empStatus === 1 ? "Employee is Present" : "Employee is Absent");
+
+        const fullTimeWage = calculateDailyWage(empStatus);
+        const partTimeWage = calculatePartTimeWage(empStatus);
+        displayWage(empStatus, fullTimeWage, partTimeWage);
+        calculateMonthlyWage();
+        calculateConditionalWage();
+    }
+}
+
 console.log("Welcome to Employee Wage Computation Program on Master Branch");
 const empStatus = checkAttendance();
 const fullTimeWage = calculateDailyWage(empStatus);
@@ -89,3 +103,5 @@ const partTimeWage = calculatePartTimeWage(empStatus);
 displayWage(empStatus, fullTimeWage, partTimeWage);
 calculateMonthlyWage();
 calculateConditionalWage();
+const empWage = new EmployeeWageCalculator();
+empWage.computeWages();
