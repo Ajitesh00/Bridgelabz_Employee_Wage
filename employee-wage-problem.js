@@ -31,7 +31,26 @@ function calculatePartTimeWage(empStatus) {
     return wage;
 }
 
+// UC4: Switch case display
+function displayWage(empStatus, fullTimeWage, partTimeWage) {
+    const choice = 2; // hardcoded
+    switch (choice) {
+        case 1:
+            console.log(empStatus === 1 ? "Employee is Present" : "Employee is Absent");
+            break;
+        case 2:
+            console.log("Daily Full-time Wage:", fullTimeWage);
+            break;
+        case 3:
+            console.log("Daily Part-time Wage:", partTimeWage);
+            break;
+        default:
+            console.log("Invalid choice!");
+    }
+}
+
 console.log("Welcome to Employee Wage Computation Program on Master Branch");
 const empStatus = checkAttendance();
-calculateDailyWage(empStatus);
-calculatePartTimeWage(empStatus);
+const fullTimeWage = calculateDailyWage(empStatus);
+const partTimeWage = calculatePartTimeWage(empStatus);
+displayWage(empStatus, fullTimeWage, partTimeWage);
