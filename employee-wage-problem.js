@@ -1,6 +1,9 @@
 const WAGE_PER_HOUR = 20;
 const FULL_DAY_HOUR = 8;
 const PART_TIME_HOUR = 4;
+const WORKING_DAYS_PER_MONTH = 20;
+
+let attendance = new Array(WORKING_DAYS_PER_MONTH).fill(0);
 
 // UC1: Check Employee Attendance
 function checkAttendance() {
@@ -49,8 +52,24 @@ function displayWage(empStatus, fullTimeWage, partTimeWage) {
     }
 }
 
+// UC5: Monthly Attendance & Wage
+function calculateMonthlyWage() {
+    let monthlyWage = 0;
+    let count=0;
+    for (let i = 0; i < WORKING_DAYS_PER_MONTH; i++) {
+        attendance[i] = checkAttendance();
+        if (attendance[i] === 1) {
+            count++;
+            monthlyWage += WAGE_PER_HOUR * FULL_DAY_HOUR;
+        }
+    }
+    console.log("Count of Working Days:",count);
+    console.log("Total Monthly Employee Wage:", monthlyWage);
+}
+
 console.log("Welcome to Employee Wage Computation Program on Master Branch");
 const empStatus = checkAttendance();
 const fullTimeWage = calculateDailyWage(empStatus);
 const partTimeWage = calculatePartTimeWage(empStatus);
 displayWage(empStatus, fullTimeWage, partTimeWage);
+calculateMonthlyWage();
