@@ -2,6 +2,7 @@ const WAGE_PER_HOUR = 20;
 const FULL_DAY_HOUR = 8;
 const PART_TIME_HOUR = 4;
 const WORKING_DAYS_PER_MONTH = 20;
+const MAX_HOURS = 100;
 
 let attendance = new Array(WORKING_DAYS_PER_MONTH).fill(0);
 
@@ -67,9 +68,24 @@ function calculateMonthlyWage() {
     console.log("Total Monthly Employee Wage:", monthlyWage);
 }
 
+// UC6: Wage till max hours/days
+function calculateConditionalWage() {
+    let totalHours = 0, totalDays = 0, totalWage = 0;
+    for (let i = 0; i < WORKING_DAYS_PER_MONTH && totalHours < MAX_HOURS; i++) {
+        if (attendance[i] === 1) {
+            totalHours += FULL_DAY_HOUR;
+            totalWage += WAGE_PER_HOUR * FULL_DAY_HOUR;
+            totalDays++;
+        }
+    }
+    console.log("Total Hours Accumulated:", totalHours);
+    console.log("Total Conditional Wage:", totalWage);
+}
+
 console.log("Welcome to Employee Wage Computation Program on Master Branch");
 const empStatus = checkAttendance();
 const fullTimeWage = calculateDailyWage(empStatus);
 const partTimeWage = calculatePartTimeWage(empStatus);
 displayWage(empStatus, fullTimeWage, partTimeWage);
 calculateMonthlyWage();
+calculateConditionalWage();
